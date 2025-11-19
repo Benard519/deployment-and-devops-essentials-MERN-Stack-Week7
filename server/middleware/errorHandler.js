@@ -1,35 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
 
-const notFoundHandler = (req, res, next) => {
-  const error = new Error(`Route ${req.originalUrl} not found`);
-  error.statusCode = StatusCodes.NOT_FOUND;
-  next(error);
-};
-
-const errorHandler = (err, req, res, _next) => {
-  const status = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
-  const response = {
-    status: 'error',
-    message: err.message || 'Something went wrong',
-    path: req.originalUrl,
-    timestamp: new Date().toISOString(),
-  };
-
-  if (process.env.NODE_ENV !== 'production' && err.stack) {
-    response.stack = err.stack;
-  }
-
-  console.error(`[Error] ${status} - ${req.method} ${req.originalUrl}:`, err.message);
-  res.status(status).json(response);
-};
-
-module.exports = {
-  notFoundHandler,
-  errorHandler,
-};
-
-const { StatusCodes } = require('http-status-codes');
-
 const notFoundHandler = (req, res) => {
   res.status(StatusCodes.NOT_FOUND).json({
     message: 'Route not found',
@@ -62,4 +32,5 @@ module.exports = {
   notFoundHandler,
   errorHandler,
 };
+
 
