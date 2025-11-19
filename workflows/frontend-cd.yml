@@ -1,0 +1,44 @@
+name: Frontend CD
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'client/**'
+      - 'deployment/frontend/**'
+      - '.github/workflows/frontend-cd.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.repository_owner != 'local'
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Ensure Vercel secrets exist
+        run: |
+          if [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ] || [ -z "$VERCEL_TOKEN" ]; then
+            echo "Vercel secrets missing. Skipping deployment."
+            exit 0
+          fi
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+      - name: Pull Vercel configuration
+        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN --scope=$VERCEL_ORG_ID
+        working-directory: client
+      - name: Build Frontend
+        run: vercel build --token=$VERCEL_TOKEN --scope=$VERCEL_ORG_ID
+        working-directory: client
+      - name: Deploy Frontend
+        run: vercel deploy --prebuilt --token=$VERCEL_TOKEN --scope=$VERCEL_ORG_ID --prod
+        working-directory: client
+
