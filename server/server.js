@@ -91,7 +91,7 @@ const PORT = process.env.PORT || 5000;
 const start = async () => {
   await connectDB();
   initializeSocket(server);
-  server.listen(PORT, () => {
+  server.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
   });
 };
@@ -100,4 +100,6 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 start();
+
+
 
