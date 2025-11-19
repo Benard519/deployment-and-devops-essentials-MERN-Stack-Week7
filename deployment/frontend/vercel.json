@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "name": "socketio-chat",
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "client/dist"
+      }
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "@api_url"
+  },
+  "framework": "vite",
+  "git": {
+    "deploymentEnabled": true
+  }
+}
+
+
