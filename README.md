@@ -4,10 +4,10 @@ Fully featured real-time chat platform built with the MERN stack and Socket.io. 
 
 ---
 
-## Live Links (placeholders)
+## Live Links
 
-- **Frontend:** https://socketio-chat.vercel.app _(replace after deploying)_
-- **Backend/API:** https://socketio-chat-api.onrender.com _(replace after deploying)_
+- **Frontend:** https://socketio-chats.netlify.app/
+- **Backend/API:** _(Set in Render dashboard - update this after deployment)_
 
 ---
 
@@ -15,7 +15,7 @@ Fully featured real-time chat platform built with the MERN stack and Socket.io. 
 
 - **Server:** Node.js 18, Express, Socket.io, MongoDB/Mongoose, JWT, Helmet, Morgan, Compression
 - **Client:** React (Vite), Context API, socket.io-client, React Router, React Hot Toast
-- **Tooling:** Vercel (frontend), Render (backend), GitHub Actions (CI/CD), UptimeRobot + Sentry (monitoring)
+- **Tooling:** Netlify (frontend), Render (backend), GitHub Actions (CI/CD), UptimeRobot + Sentry (monitoring)
 
 ### Repository Layout
 
@@ -23,10 +23,11 @@ Fully featured real-time chat platform built with the MERN stack and Socket.io. 
 socketio-chat/
 ├── client/                     # Vite + React SPA
 ├── server/                     # Express + Socket.io API
-├── deployment/                 # Render + Vercel manifests
+├── deployment/                 # Render + Netlify manifests
 │   ├── backend/
 │   │   └── render.yaml
 │   └── frontend/
+│       ├── netlify.toml
 │       └── vercel.json
 ├── monitoring/                 # Health check & observability guides
 ├── .github/workflows/          # CI/CD pipelines
@@ -113,13 +114,14 @@ cd client && npm run build && npm run preview
 3. Enable automatic deploys from `main` if desired.
 4. Add a custom domain and enforce HTTPS once verified.
 
-### Frontend → Vercel
+### Frontend → Netlify
 
-1. Import the repo into Vercel (framework detection: Vite).
-2. Configure build settings or keep `deployment/frontend/vercel.json`.
-   - Build command: `npm run build`
-   - Output directory: `client/dist`
-3. Add environment variable `VITE_API_URL=https://<render-api-url>`.
+1. Import the repo into Netlify and connect your GitHub repository.
+2. Configure build settings (or use `deployment/frontend/netlify.toml`):
+   - **Base directory:** `client`
+   - **Build command:** `npm install && npm run build`
+   - **Publish directory:** `client/dist`
+3. Add environment variable `VITE_API_URL=https://<render-api-url>` in Netlify dashboard.
 4. Deploy. The SPA will automatically talk to the Render API via the configured URL.
 
 ---
@@ -132,10 +134,10 @@ Workflows inside `.github/workflows/`:
 | --- | --- | --- |
 | `frontend-ci.yml` | Pull requests touching `client/**` | Installs deps, runs ESLint, Vitest, and `vite build`. |
 | `backend-ci.yml` | Pull requests touching `server/**` | Installs deps, ESLint, Node test runner, quick `npm start --help`. |
-| `frontend-cd.yml` | Push to `main` (client/deployment files) | Builds + deploys via Vercel CLI using `VERCEL_*` secrets. |
+| `frontend-cd.yml` | Push to `main` (client/deployment files) | Builds + deploys via Netlify CLI using `NETLIFY_*` secrets. |
 | `backend-cd.yml` | Push to `main` (server/deployment files) | Triggers Render deploy via API using `RENDER_*` secrets. |
 
-> Configure `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, `RENDER_API_KEY`, and `RENDER_SERVICE_ID` in GitHub repo secrets.
+> Configure `NETLIFY_AUTH_TOKEN`, `NETLIFY_SITE_ID`, `VITE_API_URL`, `RENDER_API_KEY`, and `RENDER_SERVICE_ID` in GitHub repo secrets.
 
 ---
 
@@ -184,7 +186,7 @@ Workflows inside `.github/workflows/`:
 ## Deployment Scripts Folder
 
 - `deployment/backend/render.yaml` – infrastructure-as-code manifest for Render.
-- `deployment/frontend/vercel.json` – Vercel configuration for the Vite SPA.
+- `deployment/frontend/netlify.toml` – Netlify configuration for the Vite SPA.
 
 Update these when environments change (custom domains, scaling plan, env vars, etc.).
 
@@ -198,3 +200,4 @@ Update these when environments change (custom domains, scaling plan, env vars, e
 ---
 
 Happy chatting & shipping! 🚀
+
