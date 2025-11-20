@@ -7,8 +7,7 @@ Fully featured real-time chat platform built with the MERN stack and Socket.io. 
 ## Live Links
 
 - **Frontend:** https://socketio-chats.netlify.app/
-- **Backend/API:** _(Set in Render dashboard - update this after deployment)_
-
+- **Backend/API:** https://deployment-and-devops-essentials-mern.onrender.com
 ---
 
 ## Tech Stack
@@ -200,4 +199,5 @@ Update these when environments change (custom domains, scaling plan, env vars, e
 ---
 
 Happy chatting & shipping! 🚀
+
 
