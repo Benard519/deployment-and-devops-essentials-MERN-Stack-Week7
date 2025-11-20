@@ -164,11 +164,15 @@ Workflows inside `.github/workflows/`:
 
 ## Screenshots / GIF Placeholders
 
-![Login Screen](docs/screenshots/login.png)
-![Chat Room](docs/screenshots/chat-room.png)
-![Notifications](docs/screenshots/notifications.gif)
+![Login Screen](<img width="1920" height="1080" alt="Screenshot (392)" src="https://github.com/user-attachments/assets/1ace2303-193c-4b1c-a54a-4e3f2766d915" />)
+![Chat Room](<img width="1920" height="1080" alt="Screenshot (394)" src="https://github.com/user-attachments/assets/52b82083-7786-414f-83ef-90d2203517c9" />)
+![Notifications](<img width="1920" height="1080" alt="Screenshot (393)" src="https://github.com/user-attachments/assets/bafbf3b5-89ed-42dd-bb8d-3a9106283f7a" />)
+![Logs: MongoDB Connected](<img width="1920" height="1080" alt="Screenshot (395)" src="https://github.com/user-attachments/assets/1ebd7648-04ec-4978-88fb-c2d99c2a8b5d" />)
+![Build successful](<img width="1920" height="1080" alt="Screenshot (396)" src="https://github.com/user-attachments/assets/6a6e7173-dc8d-4559-a4e7-ddd32ca1a73d" />)
+![health check](<img width="1920" height="1080" alt="Screenshot (397)" src="https://github.com/user-attachments/assets/db7438d1-5307-4fab-bd74-a6c582e95829" />)
 
 ---
+
 
 ## Troubleshooting
 
@@ -199,5 +203,6 @@ Update these when environments change (custom domains, scaling plan, env vars, e
 ---
 
 Happy chatting & shipping! 🚀
+
 
 
